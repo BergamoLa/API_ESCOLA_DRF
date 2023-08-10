@@ -8,6 +8,8 @@ from escola.views import (
     ListaAlunosMatriculados,
 )
 from rest_framework import routers
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register("alunos", AlunosViewSet, basename="Alunos")
@@ -19,4 +21,4 @@ urlpatterns = [
     path("", include(router.urls)),
     path("aluno/<int:pk>/matriculas/", ListaMatriculasAluno.as_view()),
     path("curso/<int:pk>/matriculas/", ListaAlunosMatriculados.as_view()),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
